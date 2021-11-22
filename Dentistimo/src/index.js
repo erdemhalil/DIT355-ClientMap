@@ -1,6 +1,6 @@
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from './assets/home/index';
+import Home from './home/index';
 
 
   render(
