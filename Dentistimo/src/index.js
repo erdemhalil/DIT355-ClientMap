@@ -1,12 +1,12 @@
 import { render } from "react-dom";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import Home from './home/index';
+import Map from './map/index';
 
 
   render(
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<Map/>} />
       </Routes>
     </BrowserRouter>,
     document.getElementById("root")
