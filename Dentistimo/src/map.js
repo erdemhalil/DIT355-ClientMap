@@ -21,7 +21,7 @@ export default function Map() {
                     </div>
                 </header>
                 <div className="section-name" id="location-results-section-name">
-                    All locations
+                    All dentists
                 </div>
                 <div className="results">
                     <ul id="location-results-list"></ul>
