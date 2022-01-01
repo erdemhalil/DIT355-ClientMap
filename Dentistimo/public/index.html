@@ -462,13 +462,23 @@
       }
     </script>
     <script>
+      /*Get dentist data from mqtt and initialize*/
+      let dentist = [];
+      dentist = mqtt("get", "/dentists/list/", "");
+
+      let locations = dentist.map(element=>({
+        title: element.name,
+        address1: element.address,
+        address2: element.city,
+        coords: {
+          lat: element.coordinate.latitude,
+          lng: element.coordinate.longitude
+        }
+      }));  
+
+      /*Config initialize with map key*/
       const CONFIGURATION = {
-        "locations": [
-          {"title":"Tooth Fairy Dentist","address1":"Slottsskogen","address2":"Göteborg, Sweden","coords":{"lat":57.685255,"lng":11.942625},"placeId":"ChIJzVFZZTvzT0YRH_n4sGTfqHk"},
-          {"title":"Your Dentist","address1":"Spannmålsgatan 20","address2":"Göteborg, Sweden","coords":{"lat":57.707619,"lng":11.969388},"placeId":"ChIJ2ZOdWGHzT0YRL8tEiO3Zm2E"},
-          {"title":"The Crown","address1":"Lindholmsallén 19","address2":"Göteborg, Sweden","coords":{"lat":57.709872,"lng":11.940386},"placeId":"EixMaW5kaG9sbXNhbGzDqW4gMTksIDQxNyA1NSBHw7Z0ZWJvcmcsIFN3ZWRlbiJQEk4KNAoyCYmt1Z1Q809GEROVZRSnAYjOGh4LEO7B7qEBGhQKEgm7C8d1WfNPRhGjgmUQeJABCwwQEyoUChIJ66DBl1nzT0YR2H6aHSnjFPA"},
-          {"title":"Lisebergs Dentists","address1":"Liseberg","address2":"Göteborg, Sweden","coords":{"lat":57.694723,"lng":11.991153},"placeId":"ChIJ2QejyJ3zT0YRWAFqRaw6N2Q"}
-        ],
+        "locations": locations,
         "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":true,"streetViewControl":true,"zoom":4,"zoomControl":true,"maxZoom":17},
         "mapsApiKey": "AIzaSyBMNLQDmMCqLS-rC1tq8uJYb23pMNIqoLo"
       };
