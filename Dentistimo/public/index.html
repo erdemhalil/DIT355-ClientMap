@@ -461,8 +461,8 @@
         };
       }
     </script>
-    <script>
-      /*Get dentist data from mqtt and initialize*/
+    <script src = '../src/mqtt.js'>
+      /*Get dentist data from mqtt and initialize*/      
       let dentist = [];
       dentist = mqtt("get", "/dentists/list/", "");
 
