@@ -461,12 +461,41 @@
         };
       }
     </script>
-    <script src = '../src/mqtt.js'>
-      /*Get dentist data from mqtt and initialize*/      
+    <script>
+      /*Initialize mqtt*/      
+      function generateId(length) {
+          let result = '';
+          let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          let charactersLength = characters.length;
+          for (let i = 0; i < length; i++) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          }
+          return result;
+      }
+
+      function mqtt(request, url, data) {
+          const ws = new WebSocket("ws://localhost:8082");
+          var message = []
+          ws.onopen = () => {
+              let id = generateId(30)
+              ws.send(JSON.stringify({ "id": id, "request": request, "url": url, "data": data }));
+          }
+          ws.onmessage = function (event) {
+              message.push(JSON.parse(event.data));
+              ws.close();
+          }
+          return message
+      }
+
+      /*Dentist data*/
       let dentist = [];
       dentist = mqtt("get", "/dentists/list/", "");
-
-      let locations = dentist.map(element=>({
+      console.log(dentist)
+      
+      let locations = []
+      setTimeout(() => {
+        console.log(dentist[0])
+        locations = dentist[0].data.map(element=>({
         title: element.name,
         address1: element.address,
         address2: element.city,
@@ -475,6 +504,10 @@
           lng: element.coordinate.longitude
         }
       }));  
+      console.log(locations)
+      }, 100);
+
+
 
       /*Config initialize with map key*/
       const CONFIGURATION = {
