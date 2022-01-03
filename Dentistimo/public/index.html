@@ -490,11 +490,9 @@
       /*Dentist data*/
       let dentist = [];
       dentist = mqtt("get", "/dentists/list/", "");
-      console.log(dentist)
-      
+
       let locations = []
       setTimeout(() => {
-        console.log(dentist[0])
         locations = dentist[0].data.map(element=>({
         title: element.name,
         address1: element.address,
@@ -503,18 +501,21 @@
           lat: element.coordinate.latitude,
           lng: element.coordinate.longitude
         }
-      }));  
-      console.log(locations)
+      }));
       }, 100);
 
 
 
       /*Config initialize with map key*/
-      const CONFIGURATION = {
+      let CONFIGURATION = {}
+      setTimeout(() =>{
+        CONFIGURATION = {
         "locations": locations,
         "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":true,"streetViewControl":true,"zoom":4,"zoomControl":true,"maxZoom":17},
         "mapsApiKey": "AIzaSyBMNLQDmMCqLS-rC1tq8uJYb23pMNIqoLo"
       };
+      }, 100);
+     
       
       function initMap() {
         setTimeout(() =>{
