@@ -28,7 +28,7 @@
     -->
     <script>
       'use strict';
-
+      var selectedLocation;
       /** Hide a DOM element. */
       function hideElement(el) {
         el.style.display = 'none';
@@ -411,6 +411,8 @@
 
         locator.showDetails = function(locationIndex) {
           const location = locator.locations[locationIndex];
+          selectedLocation = locator.locations[locationIndex].id;
+
           const context = {location};
 
           // Helper function to create a fixed-size array.
@@ -494,6 +496,7 @@
       let locations = []
       setTimeout(() => {
         locations = dentist[0].data.map(element=>({
+        id: element.id,
         title: element.name,
         address1: element.address,
         address2: element.city,
@@ -522,7 +525,6 @@
           new LocatorPlus(CONFIGURATION);
           infoWindow = new google.maps.InfoWindow();
           const locationButton = document.createElement("button");
-          debugger;
           locationButton.textContent = "Pan to Current Location";
           locationButton.classList.add("custom-map-control-button");
           map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
@@ -630,6 +632,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         {{/if}}
       </div>
       <hr/>
+      <button onclick="book(selectedLocation)" style="text-align: center; display: block; margin: auto; background-color: rgb(26, 116, 146); color: white; padding: 10px 15px; font-weight: bold; border-radius: 6px;">Book appointment</button>
       {{#if place.opening_hours}}
         <div class="hours contact">
           <img src="https://fonts.gstatic.com/s/i/googlematerialicons/schedule/v12/24px.svg"
@@ -683,6 +686,12 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+      const book = (id) => {
+        window.location.replace(`http://localhost:3000/bookPage/${id}/`);
+      }
+      </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMNLQDmMCqLS-rC1tq8uJYb23pMNIqoLo&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_locatorplus_v4_cABCDE" async defer></script>
   </body>
 </html>
