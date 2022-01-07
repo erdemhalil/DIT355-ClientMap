@@ -1,8 +1,10 @@
 {
   "name": "mapproject",
   "version": "0.1.0",
+  "homepage": "http://localhost:3001/map",
   "private": true,
   "dependencies": {
+    "@mui/lab": "^5.0.0-alpha.63",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -12,7 +14,7 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
