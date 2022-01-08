@@ -7,7 +7,7 @@ For more detailed information of the component and the whole system head over to
 ### Prerequisites 
 To run the Map you will need Node installed on your computer.
 
-You can install them by clicking on the according option below (you'll be redirected to a third-party web page):
+You can install it by clicking on the option below (you'll be redirected to a third-party web page):
 - [Node](https://nodejs.org/en/download/)
 
 ### Running
